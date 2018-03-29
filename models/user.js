@@ -1,5 +1,6 @@
-var mongoose = require('mongoose');
-var UsrSchema = require('../schemas/user');
-var Usr = mongoose.model('Usr', UsrSchema)
+import mongoose from 'mongoose'
+import UsrSchema from '../schemas/user'
 
-module.exports = Usr
+const UsrModel = mongoose.model('Usr', UsrSchema)
+
+export default UsrModel

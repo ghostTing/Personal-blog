@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+import mongoose from 'mongoose'
 
-var UsrSchema = new mongoose.Schema({
+const UsrSchema = new mongoose.Schema({
   username: String,
   password: String
 });
@@ -8,9 +8,19 @@ UsrSchema.pre('add', function (next) {
 
 });
 UsrSchema.statics = {
-  fetch: function (cb) {
+  fetch(cb) {
   },
-  findByUsername: function (username, cb) {
+  findByUsername(username, cb) {
+    return new Promise((resolve, reject) => {
+      this.findOne({
+        username: username
+      }, (error, doc) => {
+        resolve(doc === null ? false : {
+          username: doc.username,
+          password: doc.password
+        })
+      })
+    })
   }
 };
-module.exports = UsrSchema
+export default UsrSchema
